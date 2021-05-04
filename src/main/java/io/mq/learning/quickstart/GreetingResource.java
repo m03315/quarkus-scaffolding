@@ -6,6 +6,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
+import java.lang.annotation.*;
 
 //Identifies the URI path of the current resource
 @Path("/hello")
@@ -46,5 +47,11 @@ public class GreetingResource {
     public void delete() {
         System.out.println("Delete");
     }
+
+    @LOCK
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("{id}")
+    public String lockResource(@PathParam("id") long id) {
+        return id + " locked"; }
 
 }
