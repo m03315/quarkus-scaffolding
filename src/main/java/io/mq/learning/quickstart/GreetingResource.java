@@ -1,20 +1,31 @@
 package io.mq.learning.quickstart;
 
 import javax.annotation.PostConstruct;
+import javax.validation.constraints.NotBlank;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriInfo;
 
 //Identifies the URI path of the current resource
 @Path("/hello")
 public class GreetingResource {
 
+    public static enum Order{
+        desc, asc;
+    }
+
     //Responds to HTTP GET requests
     @GET
     //Defines the media type(s) that are returned
     @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
+    public String hello(
+            @Context UriInfo uriInfo,
+            @QueryParam("order") Order order,
+            @NotBlank @HeaderParam("authorization") String authorization) {
         //Returns plain text
-        return "hello";
+        return String.format("URI: %s - Order %s - Authorization: %s", uriInfo.getAbsolutePath(),
+                order,authorization);
     }
 
     @POST
