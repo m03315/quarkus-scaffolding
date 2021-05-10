@@ -38,6 +38,17 @@ public class GreetingResource {
         return color;
     }
 
+    @ConfigProperty(name = "greeting.vat")
+    Percentage vat;
+
+    @GET
+    @Path("/vat")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String vat() {
+        return Double.toString(vat.getPercentage());
+    }
+
+
     private static org.jboss.logging.Logger logger = org.jboss.logging.Logger.getLogger(GreetingResource.class);
 
     public static enum Order {
