@@ -28,6 +28,16 @@ public class GreetingResource {
     Config config;
     //ConfigProvider.getConfig()
 
+    @ConfigProperty(name = "greeting.color")
+    String color;
+
+    @GET
+    @Path("/color")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String color() {
+        return color;
+    }
+
     private static org.jboss.logging.Logger logger = org.jboss.logging.Logger.getLogger(GreetingResource.class);
 
     public static enum Order {
@@ -35,26 +45,34 @@ public class GreetingResource {
     }
 
     @GET
-    @Path("/log") @Produces(MediaType.TEXT_PLAIN) public String helloLog() {
+    @Path("/log")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String helloLog() {
         logger.info("I said Hello");
-        return "hello"; }
+        return "hello";
+    }
 
 
     @GET
     @Path("/config")
-    @Produces(MediaType.TEXT_PLAIN) public String helloConfig() {
-        config.getPropertyNames().forEach( p ->
+    @Produces(MediaType.TEXT_PLAIN)
+    public String helloConfig() {
+        config.getPropertyNames().forEach(p ->
                 System.out.println(p));
         return config.getValue("greeting.message", String.class);
     }
 
 
-    @GET @Path("/optional")
-    @Produces(MediaType.TEXT_PLAIN) public String helloOptional() {
-        return upperCase ? message.toUpperCase() : message; }
+    @GET
+    @Path("/optional")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String helloOptional() {
+        return upperCase ? message.toUpperCase() : message;
+    }
 
     @ConfigProperty(name = "greeting.suffix")
     List<String> suffixes;
+
     @GET
     @Path("/list")
     @Produces(MediaType.TEXT_PLAIN)
