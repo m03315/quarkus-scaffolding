@@ -81,8 +81,8 @@
         <configuration>
           <systemProperties>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-            <quarkus.test.profile>foo</quarkus.test.profile> <buildDirectory>${project.build.directory}
-          </buildDirectory>
+            <quarkus.test.profile>foo</quarkus.test.profile>
+            <buildDirectory>${project.build.directory}</buildDirectory>
           </systemProperties>
         </configuration>
       </plugin>
