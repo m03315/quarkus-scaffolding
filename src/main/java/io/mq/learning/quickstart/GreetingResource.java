@@ -48,6 +48,15 @@ public class GreetingResource {
         return Double.toString(vat.getPercentage());
     }
 
+    @Inject
+    GreetingConfiguration greetingConfiguration;
+
+    @GET
+    @Path("/configurations")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String helloConfigurations() {
+        return greetingConfiguration.message + greetingConfiguration.suffix;
+    }
 
     private static org.jboss.logging.Logger logger = org.jboss.logging.Logger.getLogger(GreetingResource.class);
 
